@@ -12,11 +12,15 @@ public class ScoreManager : MonoBehaviour {
 	float fadeSpeed;
 	public Image scorePanel;
 	public Image finalScorePanel;
+
+	private bool isGameEnded;
+
 	// Use this for initialization
 	void Start () {
 		finalScorePanel.gameObject.SetActive (false);
 		StartCoroutine (FadeEffect.FadeIn(scoreText,fadeSpeed));
 		StartCoroutine (FadeEffect.FadeIn(scorePanel,fadeSpeed));
+		isGameEnded = false;
 	}
 	
 	// Update is called once per frame
@@ -29,13 +33,28 @@ public class ScoreManager : MonoBehaviour {
 			Debug.Log ("Restarting");
 			SceneManager.LoadScene ("Menu");
 		}
+		if (Pvr_UnitySDKAPI.Controller.UPvr_GetKeyDown(0, Pvr_UnitySDKAPI.Pvr_KeyCode.TRIGGER))
+		{
+			if (isGameEnded)
+			{
+				Debug.Log("Restarting");
+				SceneManager.LoadScene("Menu");
+			}
+		
+		}
+		if (Pvr_UnitySDKAPI.Controller.UPvr_GetKeyDown(0, Pvr_UnitySDKAPI.Pvr_KeyCode.TRIGGER))
+		{
+			if (isGameEnded)
+			{
+				Debug.Log("Restarting");
+				SceneManager.LoadScene("Menu");
+			}
+		}
 
-//		if(OVRInput.Button.Back){
-//			Debug.Log ("Restarting");
-//			SceneManager.LoadScene ("Menu");
-//		}
+
 	}
 	public void ShowFinalScore(){
 		finalScoreText.text=score+"!";
+		isGameEnded = true;
 	}
 }
