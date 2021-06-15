@@ -47,7 +47,8 @@ public class ScoreManager : MonoBehaviour {
 			if (isGameEnded)
 			{
 				Debug.Log("Restarting");
-				SceneManager.LoadScene("Menu");
+				Application.Quit();
+				//SceneManager.LoadScene("Menu");
 			}
 		}
 
