@@ -9,7 +9,7 @@ public class MenuRay : MonoBehaviour {
 	private const float k_DampingCoef = -20f;   
 	[SerializeField] private LineRenderer m_Flare;    
 	[SerializeField] private float m_DefaultLineLength = 70f;   
-	[SerializeField] MenuManager menu;
+	//[SerializeField] MenuManager menu;
 	[SerializeField] Material defaultLaser;
 	[SerializeField] Material selectLaser;
 
@@ -30,21 +30,13 @@ public class MenuRay : MonoBehaviour {
 		m_Flare.SetPosition(0, m_End.position);
 		m_Flare.SetPosition(1, m_End.position + m_End.forward * lineLength);
 
-		menu = FindObjectOfType<MenuManager>();
+		//menu = FindObjectOfType<MenuManager>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 
-		if (Input.GetKeyDown(KeyCode.S))
-		{
-			menu.StartGame();
-		}
-		if (Input.GetKeyDown(KeyCode.B))
-		{
-			menu.Begin();
-		}
-
+		
 		float lineLength = m_DefaultLineLength;
 		m_End.GetComponent<LineRenderer>().SetPosition(0, m_End.position);
 		m_End.GetComponent<LineRenderer>().SetPosition(1, m_End.position + m_End.forward * lineLength);
@@ -160,11 +152,11 @@ public class MenuRay : MonoBehaviour {
 				
 				if (Pvr_UnitySDKAPI.Controller.UPvr_GetKeyDown(0, Pvr_UnitySDKAPI.Pvr_KeyCode.TRIGGER))
 				{
-					menu.StartGame();
+					MenuManager.instance.StartGame();
 				}
 				if (Pvr_UnitySDKAPI.Controller.UPvr_GetKeyDown(1, Pvr_UnitySDKAPI.Pvr_KeyCode.TRIGGER))
 				{
-					menu.StartGame();
+					MenuManager.instance.StartGame();
 				}
 
 
@@ -177,11 +169,11 @@ public class MenuRay : MonoBehaviour {
 				
 				if (Pvr_UnitySDKAPI.Controller.UPvr_GetKeyDown(0, Pvr_UnitySDKAPI.Pvr_KeyCode.TRIGGER))
 				{
-					menu.Begin();
+					MenuManager.instance.Begin();
 				}
 				if (Pvr_UnitySDKAPI.Controller.UPvr_GetKeyDown(1, Pvr_UnitySDKAPI.Pvr_KeyCode.TRIGGER))
 				{
-					menu.Begin();
+					MenuManager.instance.Begin();
 				}
 
 			} else {

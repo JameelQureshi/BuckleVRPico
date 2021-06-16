@@ -33,7 +33,7 @@ public class MenuManager : MonoBehaviour {
 	AudioSource audioSource;
 	// Use this for initialization
 	void Start () {
-		loading.SetActive (false);
+		//loading.SetActive (false);
 		ScoreManager.score = 0;
 		audioSource = gameObject.GetComponent<AudioSource> ();
 		//audioSource.Play ();
@@ -42,6 +42,10 @@ public class MenuManager : MonoBehaviour {
 		startMenuImage = startMenu.GetComponent<Image> ();
 		directionMenuImage = directionMenu.GetComponent<Image> ();
 	}
+
+
+	public static MenuManager instance;
+
 	void Awake () {
 		Debug.Log ("Awake");
 		AudioConfiguration config = AudioSettings.GetConfiguration();
@@ -49,6 +53,15 @@ public class MenuManager : MonoBehaviour {
 		AudioSettings.Reset(config);
 		QualitySettings.vSyncCount = 0;  // VSync must be disabled
 		Application.targetFrameRate = 60;
+
+		if (instance != null)
+		{
+			Destroy(gameObject);
+		}
+		else
+		{
+			instance = this;
+		}
 	}
 	void Update(){
 		
@@ -66,7 +79,7 @@ public class MenuManager : MonoBehaviour {
 		Destroy (directionMenu.transform.GetChild(0).gameObject);
 		audioSource.PlayOneShot (hereWeGoClick);
 		StartCoroutine( FadeEffect.FadeOut (directionMenuImage,fadeSpeed));
-		StartCoroutine(LoadYourAsyncScene());
+		//StartCoroutine(LoadYourAsyncScene());
 		StartCoroutine (WaitForGamePlay());
 	}
 	IEnumerator WaitForDirection(){
@@ -77,8 +90,12 @@ public class MenuManager : MonoBehaviour {
 	IEnumerator WaitForGamePlay(){
 		yield return new WaitForSecondsRealtime (1);
 		directionMenu.SetActive (false);
-		loading.SetActive (true);
-		BGTrack.StopMenuTrack ();
+		//loading.SetActive (true);
+		BGTrack.StopMenuTrack();
+		SceneCreator.instance.SetActiveMenu(false);
+		SceneCreator.instance.roof.SetActive(false);
+		SceneCreator.instance.SetActiveGamePlay(true);
+			
 		//SceneManager.LoadScene (1);
 	}
 	IEnumerator LoadYourAsyncScene()

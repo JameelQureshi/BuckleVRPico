@@ -13,6 +13,8 @@ TagManager:
   - click1
   - click2
   - click3
+  - Menu
+  - Game
   layers:
   - Default
   - TransparentFX

@@ -29,16 +29,15 @@ public class ScoreManager : MonoBehaviour {
 			
 			scoreText.text = "" + score;
 		}
-		if(Input.GetKeyDown(KeyCode.Escape)){
-			Debug.Log ("Restarting");
-			SceneManager.LoadScene ("Menu");
-		}
+		
 		if (Pvr_UnitySDKAPI.Controller.UPvr_GetKeyDown(0, Pvr_UnitySDKAPI.Pvr_KeyCode.TRIGGER))
 		{
 			if (isGameEnded)
 			{
 				Debug.Log("Restarting");
-				SceneManager.LoadScene("Menu");
+				SceneCreator.instance.SetActiveMenu(true);
+				SceneCreator.instance.roof.SetActive(true);
+				SceneCreator.instance.SetActiveGamePlay(false);
 			}
 		
 		}
@@ -47,8 +46,9 @@ public class ScoreManager : MonoBehaviour {
 			if (isGameEnded)
 			{
 				Debug.Log("Restarting");
-				Application.Quit();
-				//SceneManager.LoadScene("Menu");
+				SceneCreator.instance.SetActiveMenu(true);
+				SceneCreator.instance.roof.SetActive(true);
+				SceneCreator.instance.SetActiveGamePlay(false);
 			}
 		}
 
